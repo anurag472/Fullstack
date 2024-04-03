@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function Login({ setLoggedIn }) {
+function Login({ setLoggedIn, setRole }) {
     const navigate = useNavigate()
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -17,20 +17,24 @@ function Login({ setLoggedIn }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoggedIn(true)
         try {
             await axios.post('http://localhost:5000/api/login', {
                 username,
                 password,
             }).then((res) => {
-                console.log(res);
-                navigate('/home')
+                if(res.data.success){
+                    setRole(res.data.role)
+                    setLoggedIn(true)
+                    navigate('/home')
+                } else {
+                    alert('Invalid username or password')
+                    setUsername('')
+                    setPassword('')
+                }
             })
         } catch (error) {
             console.error(error);
         }
-        console.log('Username:', username);
-        console.log('Password:', password);
     };
 
     return (

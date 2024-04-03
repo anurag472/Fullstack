@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb://localhost:27017/users', {
+mongoose.connect('mongodb://localhost:27017/dummy', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
@@ -9,6 +9,7 @@ mongoose.connect('mongodb://localhost:27017/users', {
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
+    role: String,
 });
 const User = mongoose.model('User', userSchema);
 module.exports = User;

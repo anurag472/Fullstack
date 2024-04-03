@@ -1,12 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const Home = ({ loggedIn }) => {
-  const navigate = useNavigate()
+const Home = ({ loggedIn, role }) => {
+  const navigate = useNavigate();
+
+  const [data, setData] = useState(null);
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/home?role=${role}`);
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     !loggedIn && navigate("/");
-  })
+    fetchData();
+  }, []);
+
 
   return (
     <div>
@@ -14,6 +28,6 @@ const Home = ({ loggedIn }) => {
       <p>This is the default Home component.</p>
     </div>
   );
-}
+};
 
 export default Home;
