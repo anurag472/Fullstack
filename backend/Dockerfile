@@ -1,4 +1,4 @@
-FROM node:iron-alppine
+FROM node:iron-alpine
 
 COPY . /app
 
