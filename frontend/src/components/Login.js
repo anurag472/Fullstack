@@ -18,7 +18,7 @@ function Login({ setLoggedIn, setRole }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/login', {
+            await axios.post('http://api.anurag47.me/api/login', {
                 username,
                 password,
             }).then((res) => {

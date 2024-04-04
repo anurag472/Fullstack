@@ -11,7 +11,7 @@ const Home = ({ loggedIn, role }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/home?role=${role}`);
+        const response = await axios.get(`http://api.anurag47.me/home?role=${role}`);
         setData(response.data);
       } catch (error) {
         console.error(error);
