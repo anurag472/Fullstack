@@ -1,8 +1,11 @@
-FROM nginx:latest as prod
+FROM node
 
-COPY --from=build /app/build /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
+WORKDIR /usr/src/app
 
-EXPOSE 80/tcp
+COPY package*.json .
 
-CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
+RUN yarn install
+
+COPY . .
+
+RUN yarn build
