@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import View from "./View";
 
 const Home = ({ loggedIn, role }) => {
   const navigate = useNavigate();
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,11 +22,13 @@ const Home = ({ loggedIn, role }) => {
     fetchData();
   }, []);
 
-
   return (
     <div>
+      <button onClick={() => navigate("/")} style={{ position: "absolute", top: 0, right: 0 }}>
+        Logout
+      </button>
       <h1>Welcome to the Home component!</h1>
-      <p>This is the default Home component.</p>
+      <View data={data} />
     </div>
   );
 };
