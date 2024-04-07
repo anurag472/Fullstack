@@ -1,7 +1,13 @@
 FROM node:iron-alpine
+WORKDIR /app
+COPY . /app
 
-COPY package*.json /usr/src/app/
-COPY . /usr/src/app/
-WORKDIR /usr/src/app
-RUN npm install
-COPY . .
+RUN apk add --no-cache --update --virtual build-deps \
+    python3 \
+    build-base git \
+  && npm install && apk del build-deps
+
+
+EXPOSE 5000
+
+CMD ["npm", "start"]

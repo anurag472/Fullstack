@@ -93,7 +93,9 @@ app.get("/home", async (req, res) => {
 });
 
 app.post("/api/login", async (req, res) => {
-  const { username, password } = req.body;
+  let { username, password } = req.body;
+  username = username.toLowerCase();
+  password = password.toLowerCase();
 
   try {
     const user = await User.findOne({ username, password });
