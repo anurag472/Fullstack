@@ -9,6 +9,9 @@ This is a MERN (MongoDB, Express.js, React.js, Node.js) stack application design
 - User
 - Manager
 
+you can choose anyone of these roles to login on the app
+username and passwords are the rolename itself
+
 ## Technologies Used
 
 - React
